@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subscription Management</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== INTRO (Netflix-style) ===== -->
+<div id="intro" class="intro">
+  <div class="intro-bg"></div>
+
+  <div class="logo-wrap">
+    <div class="logo-glow"></div>
+    <h1 class="logo">Subscription Management</h1>
+    <p class="tagline">User → Plan → Subscription → Payment</p>
+  </div>
+
+  <button id="startBtn" class="start-btn hidden" onclick="startApp()">START</button>
+  <div class="hint">Logo böyüdü → START bas</div>
+</div>
+
+<!-- ===== APP ===== -->
+<main id="app" class="app hidden">
+
+  <header class="topbar">
+    <div class="top-left">
+      <div class="dot"></div>
+      <div>
+        <div class="title">Subscription Management</div>
+        <div class="subtitle">Netflix-style demo</div>
+      </div>
+    </div>
+    <button class="ghost" onclick="resetFlow()">Reset</button>
+  </header>
+
+  <!-- STEP 1 -->
+  <section id="step1" class="card step">
+    <div class="card-head">
+      <h2>1) User yarat</h2>
+      <span class="pill">POST /users</span>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <label>Full name</label>
+        <input id="fullNameInput" placeholder="Umid Huseynli" />
+      </div>
+      <div>
+        <label>Email</label>
+        <input id="emailInput" placeholder="umit@gmail.com" />
+      </div>
+    </div>
+
+    <button class="primary" onclick="createUser()">User yarat</button>
+    <div id="userResult" class="result">-</div>
+    <div class="mini">User ID: <b id="currentUserId">-</b></div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section id="step2" class="card step">
+    <div class="card-head">
+      <h2>2) Planlar</h2>
+      <span class="pill">GET /plans</span>
+    </div>
+
+    <div class="row">
+      <button class="primary" onclick="loadPlans()">Planları gətir</button>
+      <div class="spacer"></div>
+      <div class="mini">Plan seç → Subscription açılacaq</div>
+    </div>
+
+    <label>Plan seç</label>
+    <select id="planSelect">
+      <option value="">Plan seç...</option>
+    </select>
+
+    <div id="planResult" class="result">-</div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section id="step3" class="card step">
+    <div class="card-head">
+      <h2>3) Subscription</h2>
+      <span class="pill">POST /subscriptions</span>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <label>User ID</label>
+        <input id="subUserId" placeholder="auto" />
+      </div>
+      <div>
+        <label>Plan ID</label>
+        <input id="subPlanId" placeholder="auto" />
+      </div>
+    </div>
+
+    <button class="primary" onclick="createSubscription()">Subscribe</button>
+    <div id="subResult" class="result">-</div>
+    <div class="mini">Subscription ID: <b id="currentSubId">-</b></div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section id="step4" class="card step">
+    <div class="card-head">
+      <h2>4) Payment</h2>
+      <span class="pill">POST /payments</span>
+    </div>
+
+    <label>Subscription ID</label>
+    <div class="row">
+      <input id="paySubId" placeholder="auto" />
+      <button class="primary paybtn" onclick="pay()">Pay</button>
+    </div>
+
+    <div id="payResult" class="result">-</div>
+  </section>
+
+  <footer class="footer">Static Frontend • Spring Boot Backend</footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
